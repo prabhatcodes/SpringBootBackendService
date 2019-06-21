@@ -19,25 +19,31 @@ public class UserDaoService {
         return users;
     }
 
-    public User findUserById(Long id){
+   public User findUserById(Long id){
 
-        User user = userRepository.findById(id);
+        User user = userRepository.findById(id).get();
         return user;
 
     }
 
     public User createUser(User user){
 
-        userRepository.save(user);
-        System.out.println("User added Succesfully!");
-        return user;
+        User newUser = userRepository.save(user);
+        return newUser;
 
     }
 
     public void deleteUser(Long id){
 
-        User user = findUserById(id);
-        userRepository.delete(user);
+        userRepository.deleteById(id);
 
     }
+
+    public User updateUser(User user){
+
+        User modifiedUser = userRepository.save(user);
+        return modifiedUser;
+
+    }
+
 }
